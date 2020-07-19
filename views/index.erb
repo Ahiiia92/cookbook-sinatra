@@ -1,0 +1,27 @@
+<h1>Welcome to your Cookbook</h1>
+
+<p>You currently have in your cookbook:</p>
+
+<% @recipes.each_with_index do |recipe, index| %>
+  <% if recipe.done? %>
+    <ul>
+      <li><%= index %> - [X] - <%= recipe.name %> - (<%= recipe.prep_time %> | <%= recipe.difficulty %>) - <%= link_to 'See more', '/recipes/:index'%> - <%= link_to 'Delete', '/recipes/:index'%></li>
+      <p><%= recipe.description %></p>
+      <div>
+        <a href='/recipes/<%= index %>'>Delete</a>
+        <a href='/recipes/<%= index %>, method: patch'>Mark as done</a>
+      </div>
+    </ul>
+  <% else %>
+    <ul>
+      <li><%= index + 1 %> - [  ] - <%= recipe.name %> - (<%= recipe.prep_time %> | <%= recipe.difficulty %>)</li>
+      <p><%= recipe.description %></p>
+      <div class='space-between'>
+        <a href='/recipes/<%= index %>'>Mark As done</a>
+        <a href='/recipes/<%= index %>'>Delete</a>
+      </div>
+    </ul>
+  <% end %>
+<% end %>
+
+<a href='/new'>Add Recipe</a>
